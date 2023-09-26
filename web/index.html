@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+      
+  <style>
+    .loader-wrap {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: cssAnimation 0s 2s forwards;
+      opacity: 0;
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 8px solid #1d1841;
+      width: 60px;
+      height: 60px;
+      animation: spin 2s linear infinite;
+      opacity: 1;
+    }
+
+    @keyframes cssAnimation {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .logo{
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div id="root">
+    <div class="logo">
+      <img src = "./src//assets/logo.svg" alt="logo cielo"/>
+    </div>
+      <div class="loader-wrap">
+      <div class="loader"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
