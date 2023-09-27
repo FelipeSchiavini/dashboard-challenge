@@ -1,17 +1,35 @@
 import { create } from "zustand";
 import { api } from "../libs/axios";
-import * as qs from 'querystringify';
-import { devtools, persist,  } from 'zustand/middleware';
+import * as qs from "querystringify";
+import { devtools, persist } from "zustand/middleware";
 type TransactionState = {
-  transactions: Transaction[];
   loading: boolean;
   error: string | null;
-  // fetchTransactions: (input?: FetchTransactionsParams) => void;
+  fetchTransactions: (input?: FetchTransactionsParams) => void;
+  transactions: Transaction[];
+  totals: Totals;
+  averages: Averages;
 };
 
 export interface FetchTransactionsParams {
-  status?: StatusTransaction | "All", 
-  brand?: CardBrand | "All"
+  status?: StatusTransaction | "All";
+  brand?: CardBrand | "All";
+}
+
+interface TransactionResponse {
+  transactions: Transaction[];
+  totals: Totals;
+  averages: Averages;
+}
+
+interface Totals {
+  grossAmount: number;
+  administrationFee: number;
+  netAmount: number;
+}
+
+interface Averages {
+  averageTicket: number;
 }
 
 
@@ -22,12 +40,22 @@ export const useTransactions = create<TransactionState>()(
         transactions: [],
         loading: false,
         error: null,
+        totals: {
+          grossAmount: 0,
+          administrationFee: 0,
+          netAmount: 0,
+        },
+        averages: {
+          averageTicket: 0,
+        },
         fetchTransactions: async (input?: FetchTransactionsParams) => {
           set({ loading: true, error: null });
           try {
-            const queryParams = qs.stringify(input || {})
-            const { data } = await api.get<Transaction[]>(`/transactions${queryParams}`);
-            set({ transactions: data });
+            const queryParams = qs.stringify(input || {});
+            const { data } = await api.get<TransactionResponse>(
+              `/transactions?${queryParams}`
+            );
+            set({ transactions: data.transactions, totals: data.totals, averages: data.averages });
           } catch (err: unknown) {
             if (err instanceof Error) {
               set({ error: err.message });
@@ -40,12 +68,11 @@ export const useTransactions = create<TransactionState>()(
         },
       }),
       {
-        name: 'transactions',
+        name: "transactions",
       }
     )
   )
-)
-
+);
 
 export interface Transaction {
   id: string;
@@ -77,9 +104,9 @@ export enum StatusTransaction {
 }
 
 export enum CardBrand {
-  MasterCard= "Mastercard",
-  Elo="Elo",
-  Visa="Visa",
-  Hipercard="Hipercard",
-  Others='Others'
+  MasterCard = "Mastercard",
+  Elo = "Elo",
+  Visa = "Visa",
+  Hipercard = "Hipercard",
+  Others = "Others",
 }

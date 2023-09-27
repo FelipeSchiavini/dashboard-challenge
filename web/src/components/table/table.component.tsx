@@ -1,5 +1,6 @@
 interface TableProps {
-  data: Record<string, string | number>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any>[];
 }
 const Table: React.FC<TableProps> = ({ data }) => {
   return (
@@ -8,7 +9,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
         <thead>
           <tr>
             {Object.keys(data?.[0]).map((title) => (
-              <th>{title}</th>
+              <th key={title}>{title}</th>
             ))}
           </tr>
         </thead>

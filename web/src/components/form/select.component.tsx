@@ -4,8 +4,8 @@ interface SelectProps {
 }
 export const Select: React.FC<SelectProps> = ({ title, options }) => {
   return (
-    <select name={title} className="select w-full md:max-w-xs rounded-md h-10 px-3">
-      <option disabled selected>
+    <select name={title} className="select w-full md:max-w-xs rounded-md h-10 px-3" defaultValue={title}>
+      <option disabled>
         {title}
       </option>
       {options.map((opt) => (
