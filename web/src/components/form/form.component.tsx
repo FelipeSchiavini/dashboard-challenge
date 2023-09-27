@@ -4,6 +4,7 @@ import { Select } from "./select.component";
 interface FormProps<T> {
   fetchFilter: (input: T)=> void;
 }
+
 export const Form: React.FC<FormProps<FetchTransactionsParams>> = ({fetchFilter}) => {
   const cardBrandOptions = ["All", CardBrand.Elo, CardBrand.MasterCard, CardBrand.Visa, CardBrand.Hipercard, CardBrand.Others]
   const paymentStatusOptions = ["All", StatusTransaction.Approved, StatusTransaction.Pending, StatusTransaction.Denied]
