@@ -11,9 +11,13 @@ type TransactionState = {
   averages: Averages;
 };
 
+export enum MoreThanOneTransactionEnum {
+  All = "All"
+} 
+
 export interface FetchTransactionsParams {
-  status?: StatusTransaction | "All";
-  brand?: CardBrand | "All";
+  status?: StatusTransaction | MoreThanOneTransactionEnum;
+  cardBrand?: CardBrand | MoreThanOneTransactionEnum;
 }
 
 interface TransactionResponse {
@@ -52,16 +56,20 @@ export const useTransactions = create<TransactionState>()(
           set({ loading: true, error: null });
           try {
             const queryParams = qs.stringify(input || {});
+
             const { data } = await api.get<TransactionResponse>(
               `/transactions?${queryParams}`
             );
             set({ transactions: data.transactions, totals: data.totals, averages: data.averages });
+
           } catch (err: unknown) {
+
             if (err instanceof Error) {
               set({ error: err.message });
             } else {
               set({ error: "Unknown Error" });
             }
+            
           } finally {
             set({ loading: false });
           }

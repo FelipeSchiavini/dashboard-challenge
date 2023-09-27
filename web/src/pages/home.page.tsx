@@ -7,10 +7,9 @@ import { Separator } from '../components/separator/separator.component';
 import CieloLogo from "../components/logo/cielo.logo";
 import {Chart} from "../components/charts/triangleBar.chart";
 import { TransactionTable } from "../components/table/transaction-table/transaction-table.component";
+import { ChartLayout } from "../components/charts/layout.chart";
+import { ScatterGraph } from "../components/charts/scatter.chart";
 
-
-//react query 
-// Virtualize list react
 export const Home: React.FC = () => {
   const { fetchTransactions, totals, averages, transactions } = useTransactions();
 
@@ -21,18 +20,34 @@ export const Home: React.FC = () => {
   return (
     <Background>
       <Separator/>
+      
       <CieloLogo/>
+      
       <Separator/>
-      <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 gap-y-4 pb-4">
+      <Separator/>
+
+      <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 gap-y-4">
         <Card description="Fat Bruto" total={totals.grossAmount} />
         <Card description="Fat Liq" total={totals.netAmount} />
         <Card description="Tot Taxas" total={totals.administrationFee} />
         <Card description="Ticket" total={averages.averageTicket} />
       </div>
+
+      <Separator/>
+
       <Separator borderBottom/>
-      <Form fetchFilter={fetchTransactions}/>
+        <Form fetchFilter={fetchTransactions}/>
       <Separator borderBottom/>
-      <Chart data={groupByChannel(transactions)}/>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 md:space-y-0 space-y-6 pb-6">
+        <ChartLayout title="Faturamento bruto por tipo de canal">
+          <Chart data={groupByChannel(transactions)}/>
+        </ChartLayout>
+        <ChartLayout title="Transações por bandeira de cartão">
+          <ScatterGraph data={transactions} x="grossAmount" y="cardBrand"/>
+        </ChartLayout>
+      </div>
+
       <TransactionTable transactions={transactions} />
     </Background>
   );
@@ -58,3 +73,4 @@ const groupByChannel = (transactions: Transaction[]): GroupedTransactionSummary[
     totalGrossAmount,
   }));
 };
+
