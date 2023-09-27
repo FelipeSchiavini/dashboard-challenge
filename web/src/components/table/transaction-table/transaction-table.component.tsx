@@ -10,6 +10,8 @@ interface TransactionTableProps {
 export const TransactionTable: React.FC<TransactionTableProps> = ({
   transactions,
 }) => {
+  if(!transactions.length)  return
+
   return (
     <Suspense fallback={<DotsLoading />}>
       <Table data={transactions} />

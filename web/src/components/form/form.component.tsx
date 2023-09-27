@@ -1,4 +1,4 @@
-import { CardBrand, FetchTransactionsParams, StatusTransaction } from "../../store/transaction.store";
+import { CardBrand, FetchTransactionsParams, MoreThanOneTransactionEnum, StatusTransaction } from "../../store/transaction.store";
 import { Select } from "./select.component";
 
 interface FormProps<T> {
@@ -6,17 +6,17 @@ interface FormProps<T> {
 }
 
 export const Form: React.FC<FormProps<FetchTransactionsParams>> = ({fetchFilter}) => {
-  const cardBrandOptions = ["All", CardBrand.Elo, CardBrand.MasterCard, CardBrand.Visa, CardBrand.Hipercard, CardBrand.Others]
-  const paymentStatusOptions = ["All", StatusTransaction.Approved, StatusTransaction.Pending, StatusTransaction.Denied]
+  const cardBrandOptions = [MoreThanOneTransactionEnum.All, CardBrand.Elo, CardBrand.MasterCard, CardBrand.Visa, CardBrand.Hipercard]
+  const paymentStatusOptions = [MoreThanOneTransactionEnum.All, StatusTransaction.Approved, StatusTransaction.Pending, StatusTransaction.Denied]
   const updateDashBoard = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const paymentStatus = form.elements.namedItem("Payment Status") as HTMLInputElement;
     const brandCard = form.elements.namedItem("Select Card Brand") as HTMLInputElement;
-    const brandCardValue  = brandCard.value as CardBrand | "All"
-    const paymentStatusValue= paymentStatus.value as StatusTransaction | "All"
+    const brandCardValue  = brandCard.value as CardBrand | MoreThanOneTransactionEnum.All
+    const paymentStatusValue= paymentStatus.value as StatusTransaction | MoreThanOneTransactionEnum.All
     fetchFilter({
-      brand: brandCardValue,
+      cardBrand: brandCardValue,
       status: paymentStatusValue
     })
   }

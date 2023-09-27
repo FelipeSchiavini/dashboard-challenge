@@ -5,8 +5,8 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  ResponsiveContainer,
 } from "recharts";
+import useWindowSize from "../../hooks/windowSize.hook";
 
 const getPath = (
   x: number,
@@ -42,7 +42,7 @@ const TriangleBar: React.FC<TriangleBarProps> = ({
   return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 };
 
-const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const colors = ["#6e0b75", "#00C49F", "#FFBB28", "#FF8042"];
 
 interface TriangleChartProps {
   data: {
@@ -51,23 +51,23 @@ interface TriangleChartProps {
   }[];
 }
 export const Chart: React.FC<TriangleChartProps> = ({ data }) => {
+  const { width } = useWindowSize();
+
+
   return (
-    <div className="w-full justify-center flex flex-col items-center"> 
-      <h2 className="text-center pb-2">Faturamento bruto por tipo de canal</h2>
-      <BarChart width={600} height={300} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
+      <BarChart width={width < 700 ? width - 32 : 600 } height={width < 700 ? 200 : 300} data={data}>
+        <CartesianGrid strokeDasharray="10 10"   />
         <XAxis dataKey="channel" />
-        <YAxis />
+        <YAxis fontSize={12} unit="$"/>
         <Bar
           dataKey="totalGrossAmount"
           shape={(props) => <TriangleBar {...props} />}
-          label={{ position: "centerTop", fill: '#fff' }}
+          label={{ position: "top", fill: '#000', fontWeight: "bold" }}
         >
           {data.map((_, index: number) => (
             <Cell key={`cell-${index}`} fill={colors[index % 20]} />
           ))}
         </Bar>
       </BarChart>
-    </div>
   );
 };
