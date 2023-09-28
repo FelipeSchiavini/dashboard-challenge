@@ -1,12 +1,64 @@
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
-import useWindowSize from "../../hooks/windowSize.hook";
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
+import { useGraphSize } from "../../hooks/graphSize.hook";
+
+interface TriangleBarProps {
+  fill: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+const colors = ["#6e0b75", "#00C49F", "#FFBB28", "#FF8042"];
+
+interface TriangleChartProps {
+  data: {
+    totalGrossAmount: number;
+    channel: string;
+  }[];
+}
+export const CustomBarChart: React.FC<TriangleChartProps> = ({ data }) => {
+  const { graphHeight, graphWidth } = useGraphSize();
+
+  return (
+    <>
+      <div className="sr-only">
+        "The bar chart shows the gross revenue by channel type."
+      </div>
+      <BarChart
+        role="img"
+        width={graphWidth}
+        height={graphHeight}
+        data={data}
+        aria-label="The bar chart shows the gross revenue by channel type."
+      >
+        <CartesianGrid strokeDasharray="10 10" />
+        <XAxis dataKey="channel" />
+        <YAxis fontSize={12} unit="$" />
+        <Bar
+          dataKey="totalGrossAmount"
+          shape={(props) => <TriangleBar {...props} />}
+          label={{ position: "top", fill: "#000", fontWeight: "bold" }}
+        >
+          {data.map((_, index: number) => (
+            <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+          ))}
+        </Bar>
+      </BarChart>
+    </>
+  );
+};
+
+const TriangleBar: React.FC<TriangleBarProps> = ({
+  fill,
+  x,
+  y,
+  width,
+  height,
+}) => {
+  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+};
+
 
 const getPath = (
   x: number,
@@ -22,52 +74,4 @@ const getPath = (
     x + width
   }, ${y + height}
   Z`;
-};
-
-interface TriangleBarProps {
-  fill: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
-const TriangleBar: React.FC<TriangleBarProps> = ({
-  fill,
-  x,
-  y,
-  width,
-  height,
-}) => {
-  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-};
-
-const colors = ["#6e0b75", "#00C49F", "#FFBB28", "#FF8042"];
-
-interface TriangleChartProps {
-  data: {
-    totalGrossAmount: number;
-    channel: string;
-  }[];
-}
-export const Chart: React.FC<TriangleChartProps> = ({ data }) => {
-  const { width } = useWindowSize();
-
-
-  return (
-      <BarChart width={width < 700 ? width - 32 : 600 } height={width < 700 ? 200 : 300} data={data}>
-        <CartesianGrid strokeDasharray="10 10"   />
-        <XAxis dataKey="channel" />
-        <YAxis fontSize={12} unit="$"/>
-        <Bar
-          dataKey="totalGrossAmount"
-          shape={(props) => <TriangleBar {...props} />}
-          label={{ position: "top", fill: '#000', fontWeight: "bold" }}
-        >
-          {data.map((_, index: number) => (
-            <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-          ))}
-        </Bar>
-      </BarChart>
-  );
 };

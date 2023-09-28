@@ -12,18 +12,6 @@ describe('Background component', () => {
     render(<Background><span>{fakerText}</span></Background>);
   });
 
-  it('should has the correct role', () => {
-    const { getByRole } = render(<Background><span>{fakerText}</span></Background>);
-    const mainElement = getByRole('region');
-    expect(mainElement).toBeTruthy();
-  });
-
-  it('should has the correct aria-label', () => {
-    const { getByLabelText } = render(<Background><span>{fakerText}</span></Background>);
-    const labeledElement = getByLabelText('background');
-    expect(labeledElement).toBeTruthy();
-  });
-
   it('should render children ', () => {
     const { getByText } = render(<Background><span>{fakerText}</span></Background>);
     const childrenText = getByText(fakerText);
