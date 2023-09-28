@@ -11,5 +11,8 @@ export default {
   daisyui: {
     themes: ["fantasy"],
   },
+  variants: {
+    accessibility: ['responsive', 'focus', 'hover', 'active']
+  }
 }
 

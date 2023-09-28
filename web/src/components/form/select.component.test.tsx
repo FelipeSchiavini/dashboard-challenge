@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 describe('Select component', () => {
 
   const randomOptions = generateRandomStringsArray()
-  const randomTitle = faker.lorem.word()
+  const randomTitle = faker.lorem.word(5)
 
   it('should render without crashing', () => {
     render(<Select title={randomTitle} options={randomOptions} />);
@@ -14,6 +14,7 @@ describe('Select component', () => {
 
   it('should render provided options', () => {
     render(<Select title={randomTitle} options={randomOptions} />);
+
     randomOptions.forEach(option => {
       const optionElement = screen.getByRole('option', { name: option });
       expect(optionElement).toHaveValue(option);
@@ -25,7 +26,7 @@ describe('Select component', () => {
 const generateRandomStringsArray = (length: number = 5) => {
   const result = [];
   for (let i = 0; i < length; i++) {
-    result.push(faker.lorem.word());
+    result.push(faker.lorem.words(5));
   }
   return result;
 }

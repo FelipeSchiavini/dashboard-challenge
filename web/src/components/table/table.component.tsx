@@ -4,7 +4,7 @@ interface TableProps {
 }
 const Table: React.FC<TableProps> = ({ data }) => {
   return (
-    <div className="overflow-x-auto" role="region">
+    <div className="overflow-x-auto" role="region" tabIndex={0}>
       <table className="table" aria-label="table">
         <thead>
           <tr>

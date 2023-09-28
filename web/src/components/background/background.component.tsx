@@ -6,7 +6,7 @@ interface Background {
 
 export const Background: React.FC<Background> = ({children}) => {
   return (
-    <main className="h-full w-full bg-gray-200 min-h-screen px-4" role="region" aria-label="background"> 
+    <main className="h-full w-full bg-gray-200 min-h-screen px-4" > 
       {children}
     </main>
   )

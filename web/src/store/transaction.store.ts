@@ -26,7 +26,7 @@ interface TransactionResponse {
   averages: Averages;
 }
 
-interface Totals {
+export interface Totals {
   grossAmount: number;
   administrationFee: number;
   netAmount: number;

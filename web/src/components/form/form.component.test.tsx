@@ -1,40 +1,40 @@
-import { render, fireEvent, screen } from '@testing-library/react';
-import { Form } from './form.component';
+import { fireEvent, render, screen } from "@testing-library/react";
+import { Form } from "./form.component";
+import { vi } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { CardBrand, StatusTransaction } from "../../store/transaction.store";
+import { faker } from '@faker-js/faker';
 
-describe('Form component', () => {
-
-  it('should render without crashing', () => {
-    const mockFn = jest.fn();
+describe("Form component", () => {
+  it("should render without crashing", () => {
+    const mockFn = vi.fn();
     render(<Form fetchFilter={mockFn} />);
   });
 
-  it('should render selects with correct options', () => {
-    const mockFn = jest.fn();
-    render(<Form fetchFilter={mockFn} />);
+  it("should submit the form with selected values", async () => {
+    const user = userEvent.setup();
+    const mockFn = vi.fn();
+    const cardBrand = faker.helpers.shuffle([ CardBrand.Elo, CardBrand.MasterCard, CardBrand.Visa, CardBrand.Hipercard])[0]
+    const paymentStatus = faker.helpers.shuffle([ StatusTransaction.Approved, StatusTransaction.Pending, StatusTransaction.Denied])[0]
     
-    // Check for one of the Payment Status options
-    expect(screen.getByRole('option', { name: 'Approved' })).toBeInTheDocument();
-    
-    // Check for one of the Card Brand options
-    expect(screen.getByRole('option', { name: 'Visa' })).toBeInTheDocument();
-  });
+    const { getByText, getAllByRole } = render(<Form fetchFilter={mockFn} />);
+    faker
+    const paymentStatusDropdown = getAllByRole("combobox")[0];
+    const statusOption = screen.getByRole("option", {
+      name: paymentStatus,
+    });
+    const cardBrandDropdown = getAllByRole("combobox")[1];
+    const brandOption = screen.getByRole("option", { name: cardBrand });
 
-  it('should call fetchFilter with correct values on form submit', () => {
-    const mockFn = jest.fn();
-    render(<Form fetchFilter={mockFn} />);
+    await user.selectOptions(paymentStatusDropdown, statusOption);
+    await user.selectOptions(cardBrandDropdown, brandOption);
 
-    const paymentStatusSelect = screen.getByLabelText('Status do pagamento') as HTMLSelectElement;
-    const cardBrandSelect = screen.getByLabelText('Bandeira do Cartão') as HTMLSelectElement;
-    const submitButton = screen.getByLabelText('Realizar busca');
-
-    fireEvent.change(paymentStatusSelect, { target: { value: 'Approved' } });
-    fireEvent.change(cardBrandSelect, { target: { value: 'Visa' } });
-
+    const submitButton = getByText("Search");
     fireEvent.click(submitButton);
 
     expect(mockFn).toHaveBeenCalledWith({
-      cardBrand: 'Visa',
-      status: 'Approved'
+      status: paymentStatus,
+      cardBrand: cardBrand,
     });
   });
 });
