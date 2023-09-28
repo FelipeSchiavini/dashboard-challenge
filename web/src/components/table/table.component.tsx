@@ -4,12 +4,12 @@ interface TableProps {
 }
 const Table: React.FC<TableProps> = ({ data }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="table">
+    <div className="overflow-x-auto" role="region">
+      <table className="table" aria-label="table">
         <thead>
           <tr>
             {Object.keys(data?.[0]).map((title) => (
-              <th key={title}>{title}</th>
+              <th key={title} scope="col">{title}</th>
             ))}
           </tr>
         </thead>

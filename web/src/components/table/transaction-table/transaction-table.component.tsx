@@ -13,7 +13,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
   if(!transactions.length)  return
 
   return (
-    <Suspense fallback={<DotsLoading />}>
+    <Suspense fallback={<DotsLoading />} >
       <Table data={transactions} />
     </Suspense>
   );
