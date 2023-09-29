@@ -13,6 +13,7 @@ import EloLogo from "../logo/elo.logo";
 import VisaLogo from "../logo/visa.logo";
 
 interface DataPoint {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -58,7 +59,7 @@ export const ScatterGraph: React.FC<ScatterGraphProps> = ({ x, y, data }): JSX.E
           left: 20,
         }}
       >
-        <CartesianGrid />
+        <CartesianGrid strokeDasharray="10 10"/>
         <XAxis type="number" dataKey={x} unit="$"  />
         <YAxis
           dataKey={y}

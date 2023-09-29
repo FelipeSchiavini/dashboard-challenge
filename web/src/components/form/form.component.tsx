@@ -1,13 +1,13 @@
 import { CardBrand, FetchTransactionsParams, MoreThanOneTransactionEnum, StatusTransaction } from "../../store/transaction.store";
+import { statusTranslated } from "../../utils/translate";
 import { Select } from "./select.component";
 
 interface FormProps<T> {
   fetchFilter: (input: T)=> void;
 }
 
+
 export const Form: React.FC<FormProps<FetchTransactionsParams>> = ({fetchFilter}) => {
-  const cardBrandOptions = [MoreThanOneTransactionEnum.All, CardBrand.Elo, CardBrand.MasterCard, CardBrand.Visa, CardBrand.Hipercard]
-  const paymentStatusOptions = [MoreThanOneTransactionEnum.All, StatusTransaction.Approved, StatusTransaction.Pending, StatusTransaction.Denied]
   const updateDashBoard = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -24,8 +24,8 @@ export const Form: React.FC<FormProps<FetchTransactionsParams>> = ({fetchFilter}
   return (
     <form className="space-y-4" onSubmit={updateDashBoard}>
       <div className="flex md:justify-center md:gap-4 md:flex-row flex-col space-y-2 md:space-y-0">
-        <Select title="Status payment" options={paymentStatusOptions} ariaLabel="select payment status"/>
-        <Select title="Card brand" options={cardBrandOptions} ariaLabel="select the card brand" />
+        <Select title="Status payment" options={getPaymentStatusOptions()} ariaLabel="select payment status"/>
+        <Select title="Card brand" options={getCardBrandOptions()} ariaLabel="select the card brand" />
       </div>
       <div className="flex w-full justify-end md:justify-center">
         <button type="submit" className="btn btn-primary md:w-60 w-32" aria-label="perform search" title="search" role="button">
@@ -35,3 +35,45 @@ export const Form: React.FC<FormProps<FetchTransactionsParams>> = ({fetchFilter}
     </form>
   );
 };
+
+export const getCardBrandOptions = () => {
+  return [
+    {
+      value: "",
+      option: MoreThanOneTransactionEnum.All
+    },
+    {
+      value: CardBrand.Elo,
+      option: CardBrand.Elo
+    },
+    {
+      value: CardBrand.MasterCard,
+      option: CardBrand.MasterCard
+    },
+    {
+      value: CardBrand.Visa,
+      option:  CardBrand.Visa
+    },
+  ]
+}
+
+export const getPaymentStatusOptions = () => {
+  return [
+    {
+      value: "",
+      option: MoreThanOneTransactionEnum.All
+    },
+    {
+      value: StatusTransaction.Approved,
+      option: statusTranslated[StatusTransaction.Approved]
+    },
+    {
+      value: StatusTransaction.Pending,
+      option: statusTranslated[StatusTransaction.Pending]
+    },
+    {
+      value: StatusTransaction.Denied,
+      option:  statusTranslated[StatusTransaction.Denied]
+    },
+  ]
+}

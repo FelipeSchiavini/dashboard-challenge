@@ -8,16 +8,17 @@ This project was crafted using the following technologies:
 
 ### Getting Started
 To set up the project:
-1. Duplicate .env.sample and rename it to .env.
-2. Install the required dependencies with `npm install`.
-3. Start the development server with npm `run dev`.
+1. Make sure you have installed the node v. 18.18.0
+2. Duplicate .env.sample and rename it to .env.
+3. Install the required dependencies with `npm install`.
+4. Start the development server with npm `run dev`.
 
 
 ### Features
   - All interactive components are keyboard accessible.
   - While the project doesn't utilize SSR, it initializes with the Cielo background and logo directly embedded within the HTML to enhance the user experience.
   - The project leverages Zustand's persistence feature to retain data fetched from the API, minimizing unnecessary requests. (https://docs.pmnd.rs/zustand/integrations/persisting-store-data)
-  - Charts and tables load asynchronously for improved user responsiveness.
+  - bar chart and table load asynchronously for improved user responsiveness.
   - Various HTML tags, such as role, aria-label, aria-labelledby, and aria-live, are employed to enhance website accessibility.
 - The majority of components have unit tests.
 - graphs with screen readers (https://tailwindcss.com/docs/screen-readers)

@@ -12,8 +12,8 @@ type TransactionState = {
 };
 
 export enum MoreThanOneTransactionEnum {
-  All = "All"
-} 
+  All = "All",
+}
 
 export interface FetchTransactionsParams {
   status?: StatusTransaction | MoreThanOneTransactionEnum;
@@ -35,7 +35,6 @@ export interface Totals {
 interface Averages {
   averageTicket: number;
 }
-
 
 export const useTransactions = create<TransactionState>()(
   devtools(
@@ -60,16 +59,17 @@ export const useTransactions = create<TransactionState>()(
             const { data } = await api.get<TransactionResponse>(
               `/transactions?${queryParams}`
             );
-            set({ transactions: data.transactions, totals: data.totals, averages: data.averages });
-
+            set({
+              transactions: data.transactions,
+              totals: data.totals,
+              averages: data.averages,
+            });
           } catch (err: unknown) {
-
             if (err instanceof Error) {
               set({ error: err.message });
             } else {
               set({ error: "Unknown Error" });
             }
-            
           } finally {
             set({ loading: false });
           }
@@ -97,12 +97,18 @@ export interface Transaction {
   terminal: string;
   administrationFee: number;
   channelCode: number;
-  channel: string;
+  channel: Channel;
   withdrawAmount: number;
   minimumMDRAmmount: number;
   mdrTaxAmount: number;
   mdrFeeAmount: number;
   status: StatusTransaction;
+}
+
+export enum Channel {
+  Ecommerce = "Ecommerce",
+  Machine = "Máquina",
+  SuperLink = "Super Link / Digitada",
 }
 
 export enum StatusTransaction {

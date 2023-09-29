@@ -3,6 +3,7 @@ import { DotsLoading } from "../../../../components/loading/loading.component";
 import { Transaction } from "../../../../store/transaction.store";
 import { ChartLayout } from "../../../../components/charts/layout.chart";
 import { CustomBarChart } from "../../../../components/charts/triangleBar.chart";
+import { channelTranslated, statusTranslated } from "../../../../utils/translate";
 const Table = lazy(
   () => import("../../../../components/table/table.component")
 );
@@ -41,8 +42,8 @@ const mapToTransactionToTable = (transactions: Transaction[]) => {
       grossAmount: transaction.grossAmount,
       netAmount: transaction.netAmount,
       administrationFee: transaction.administrationFee,
-      channel: transaction.channel,
-      status: transaction.status,
+      channel: channelTranslated[transaction.channel],
+      status: statusTranslated[transaction.status],
     };
   });
 };
@@ -52,14 +53,18 @@ type GroupedTransactionSummary = {
   totalGrossAmount: number;
 };
 
+
+
 const groupByChannel = (
   transactions: Transaction[]
 ): GroupedTransactionSummary[] => {
   const grouped = transactions.reduce((acc, transaction) => {
-    if (!acc[transaction.channel]) {
-      acc[transaction.channel] = 0;
+    const translatedChannel = channelTranslated[transaction.channel]
+
+    if (!acc[translatedChannel]) {
+      acc[translatedChannel] = 0;
     }
-    acc[transaction.channel] += transaction.grossAmount;
+    acc[translatedChannel] += transaction.grossAmount;
     return acc;
   }, {} as Record<string, number>);
 

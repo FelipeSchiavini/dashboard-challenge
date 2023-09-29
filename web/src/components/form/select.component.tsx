@@ -1,7 +1,8 @@
-import { MoreThanOneTransactionEnum } from "../../store/transaction.store";
-
 interface SelectProps {
-  options: string[];
+  options: {
+    option: string;
+    value: string;
+  }[];
   title: string;
   ariaLabel?: string;
 }
@@ -13,7 +14,7 @@ export const Select: React.FC<SelectProps> = ({ title, options, ariaLabel }) => 
       </option>
       <>
         {options.map((opt) => (
-          <option value={opt === MoreThanOneTransactionEnum.All ? "" : opt} key={opt}>{opt}</option>
+          <option value={opt.value} key={opt.option}>{opt.option}</option>
         ))}
       </>
     </select>
