@@ -13,6 +13,6 @@ export enum GraphSizeEnum {
 }
 
 export enum GraphHeightEnum {
-  Sm = 250,
+  Sm = 200,
   Lg = 300,
 }
