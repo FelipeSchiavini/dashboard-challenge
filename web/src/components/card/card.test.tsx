@@ -5,7 +5,8 @@ import { formattedNumber } from '../../utils/strings';
 
 describe('Card component', () => {
   it('should renders without crashing', () => {
-    render(<Card total={1234} />);
+    const randomNumber = faker.number.int()
+    render(<Card total={randomNumber} />);
   });
 
   it('should displays the provided description', () => {
