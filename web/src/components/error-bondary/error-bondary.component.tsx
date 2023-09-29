@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
 import { Placeholder } from "../placeholder/placeholder.component";
 import { Background } from "../background/background.component";
 
@@ -26,7 +26,6 @@ export class ErrorBoundary extends Component<Props, State> {
       error,
       errorInfo,
     });
-    // Você também pode logar o erro em um serviço externo aqui, se desejar.
   }
 
   render() {

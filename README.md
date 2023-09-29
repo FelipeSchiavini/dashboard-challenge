@@ -1,6 +1,11 @@
-# Ada + Cielo Challenge
+# Ada & Cielo Challenge
 
 This project was carried out during a bootcamp with [Cielo](https://www.cielo.com.br/) and  [Ada](https://ada.tech/). The challenge is in the project's folder ([link](./Desafio_FrontEnd_v2.0.pdf)).
+
+<div style="display: flex; justify-content: space-around; align-items: center;">
+  <img src="./project-images/pc.png" alt="mobile" height=340/>
+  <img src="./project-images/mockup.png" alt="mobile" width="150"/>
+</div>
 
 The project was crafted using the following technologies:
 - <b>React:</b> A JavaScript library for building user interfaces.
@@ -11,11 +16,6 @@ The project was crafted using the following technologies:
 - <b>Zustand:</b>  An elegant solution for state management, ensuring smooth state transitions and updates.
 - <b>Vitest and React Testing Library:</b> for unit tests
 - <b>Express and Routing Controllers:</b> Backend API
-
-<div style="display: flex; justify-content: space-around; align-items: center;">
-  <img src="./project-images/pc.png" alt="mobile" height=430/>
-  <img src="./project-images/mockup.png" alt="mobile" width="200"/>
-</div>
 
 ## API
 It has a single endpoint `{{apiUrl}}/transactions`, which can accept query parameters such as `status` and `cardBrand` as a query param. It will then return the filtered data based on ([json](./server/src/data/data.json)) from challenge.

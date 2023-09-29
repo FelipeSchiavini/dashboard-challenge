@@ -2,6 +2,7 @@ import { ErrorBoundary } from "./components/error-bondary/error-bondary.componen
 import { Home } from "./pages/home/home.page"
 
 export const App = () => {
+
   return (
     <ErrorBoundary>
       <Home />
