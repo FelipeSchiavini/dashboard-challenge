@@ -25,11 +25,9 @@ export const Home: React.FC = () => {
       <LargeSeparator borderBottom />
       <Form fetchFilter={fetchTransactions} />
       <LargeSeparator borderBottom />
-      
       {
-        transactions.length ? <DataVisualization transactions={transactions}/>: <Placeholder/>
+        transactions.length ? <DataVisualization transactions={transactions}/>: <Placeholder title="No data found" description="Can't find what you're looking for? Start a new search."/>
       }
-
     </Background>
   );
 };

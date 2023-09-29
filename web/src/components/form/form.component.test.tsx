@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Form, getCardBrandOptions } from "./form.component";
+import { Form } from "./form.component";
 import { vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { StatusTransaction } from "../../store/transaction.store";
 import { faker } from "@faker-js/faker";
 import { statusTranslated } from "../../utils/translate";
+import { getCardBrandOptions } from "../../utils/options";
 
 describe("Form component", () => {
   it("should render without crashing", () => {

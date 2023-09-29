@@ -8,7 +8,7 @@ export const getGraphWidth = (screenWidth: number) => {
   } else if (screenWidth >= ScreenSizeEnum.Md) {
     return GraphSizeEnum.Lg;
   } else {
-    return screenWidth - standardPaddingSize * 2;
+    return screenWidth - standardPaddingSize * 4;
   }
 };
 
