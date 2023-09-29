@@ -2,10 +2,13 @@
 
 This project was carried out during a bootcamp with [Cielo](https://www.cielo.com.br/) and  [Ada](https://ada.tech/). The challenge is in the project's folder ([link](./Desafio_FrontEnd_v2.0.pdf)).
 
-<div style="display: flex; justify-content: space-around; align-items: center;">
-  <img src="./project-images/pc.png" alt="mobile" height=340/>
-  <img src="./project-images/mockup.png" alt="mobile" width="150"/>
+<br><br>
+<div align="center" >
+  <img src="./project-images/pc.png" alt="mobile"  width=210 />
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="./project-images/mockup.png" alt="mobile" width =90>   
 </div>
+<br><br>
 
 The project was crafted using the following technologies:
 - <b>React:</b> A JavaScript library for building user interfaces.
@@ -85,6 +88,11 @@ To set up the *API* project:
 #### Lighthouse chorme extension report ([Documentation](https://developer.chrome.com/docs/lighthouse/overview/))
 
 ![Lighthouse](./project-images/lighthouse.png)
+
+If you need to verify this result, use the commands:
+`npm run build`
+`npm run preview`
+start analyse from lighthouse
 
 ### Features
   - All interactive components are keyboard accessible.
