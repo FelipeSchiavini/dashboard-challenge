@@ -1,4 +1,5 @@
-import { formattedNumber } from "../../utils/strings";
+import { formattedNumber } from "@/utils/strings";
+
 interface CardProps {
   description?: string;
   total: number;
@@ -6,7 +7,12 @@ interface CardProps {
 }
 export const Card: React.FC<CardProps> = ({ description, total, tooltip }) => {
   return (
-    <div className="tooltip" data-tip={tooltip} aria-label={tooltip} role="presentation">
+    <div
+      className="tooltip"
+      data-tip={tooltip}
+      aria-label={tooltip}
+      role="presentation"
+    >
       <section
         className="stats shadow md:w-52 w-32 flex mx-auto h-max-20"
         aria-label={`${description}`}

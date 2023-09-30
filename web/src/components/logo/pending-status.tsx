@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from "react";
 const PendingStatus = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -9,5 +9,5 @@ const PendingStatus = (props: SVGProps<SVGSVGElement>) => (
   >
     <path fill="#FCC123" d="M.065.874v3.484H14V.874H.065Z" />
   </svg>
-)
-export default PendingStatus
+);
+export default PendingStatus;

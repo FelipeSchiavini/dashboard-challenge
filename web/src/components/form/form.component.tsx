@@ -1,38 +1,63 @@
-import { CardBrand, FetchTransactionsParams, MoreThanOneTransactionEnum, StatusTransaction } from "../../store/transaction.store";
-import { getPaymentStatusOptions, getCardBrandOptions } from "../../utils/options";
+import {
+  CardBrand,
+  FetchTransactionsParams,
+  MoreThanOneTransactionEnum,
+  StatusTransaction,
+} from "@/store/transaction.store";
+import { getPaymentStatusOptions, getCardBrandOptions } from "@/utils/options";
 import { Select } from "./select.component";
 
 interface FormProps<T> {
-  fetchFilter: (input: T)=> void;
+  fetchFilter: (input: T) => void;
 }
 
-
-export const Form: React.FC<FormProps<FetchTransactionsParams>> = ({fetchFilter}) => {
+export const Form: React.FC<FormProps<FetchTransactionsParams>> = ({
+  fetchFilter,
+}) => {
   const updateDashBoard = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const paymentStatus = form.elements.namedItem("Status payment") as HTMLInputElement;
+    const paymentStatus = form.elements.namedItem(
+      "Status payment"
+    ) as HTMLInputElement;
     const brandCard = form.elements.namedItem("Card brand") as HTMLInputElement;
-    const brandCardValue  = brandCard.value as CardBrand | MoreThanOneTransactionEnum.All
-    const paymentStatusValue= paymentStatus.value as StatusTransaction | MoreThanOneTransactionEnum.All
+    const brandCardValue = brandCard.value as
+      | CardBrand
+      | MoreThanOneTransactionEnum.All;
+    const paymentStatusValue = paymentStatus.value as
+      | StatusTransaction
+      | MoreThanOneTransactionEnum.All;
     fetchFilter({
       cardBrand: brandCardValue,
-      status: paymentStatusValue
-    })
-  }
+      status: paymentStatusValue,
+    });
+  };
 
   return (
     <form className="space-y-4" onSubmit={updateDashBoard}>
       <div className="flex md:justify-center md:gap-4 md:flex-row flex-col space-y-2 md:space-y-0">
-        <Select title="Status payment" options={getPaymentStatusOptions()} ariaLabel="select payment status"/>
-        <Select title="Card brand" options={getCardBrandOptions()} ariaLabel="select the card brand" />
+        <Select
+          title="Status payment"
+          options={getPaymentStatusOptions()}
+          ariaLabel="select payment status"
+        />
+        <Select
+          title="Card brand"
+          options={getCardBrandOptions()}
+          ariaLabel="select the card brand"
+        />
       </div>
       <div className="flex w-full justify-end md:justify-center">
-        <button type="submit" className="btn btn-primary md:w-60 w-32" aria-label="perform search" title="search" role="button">
-        Search
+        <button
+          type="submit"
+          className="btn btn-primary md:w-60 w-32"
+          aria-label="perform search"
+          title="search"
+          role="button"
+        >
+          Search
         </button>
       </div>
     </form>
   );
 };
-

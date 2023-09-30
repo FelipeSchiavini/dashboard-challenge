@@ -1,4 +1,4 @@
-import { getGraphHeight, getGraphWidth } from "../utils/graph";
+import { getGraphHeight, getGraphWidth } from "@/utils/graph";
 import useWindowSize from "./windowSize.hook";
 
 export const useGraphSize = () => {
@@ -6,6 +6,6 @@ export const useGraphSize = () => {
 
   return {
     graphWidth: getGraphWidth(screenWidth),
-    graphHeight: getGraphHeight(screenWidth)
-  }
-}
+    graphHeight: getGraphHeight(screenWidth),
+  };
+};

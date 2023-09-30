@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { Card } from './card.component';
 import { faker } from '@faker-js/faker';
-import { formattedNumber } from '../../utils/strings';
+import { formattedNumber } from '@/utils/strings';
 
 describe('Card component', () => {
   it('should renders without crashing', () => {
