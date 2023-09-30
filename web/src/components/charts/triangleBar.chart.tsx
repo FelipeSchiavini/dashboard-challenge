@@ -1,5 +1,6 @@
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
 import { useGraphSize } from "@/hooks/graphSize.hook";
+import { useThemeState, Theme } from "@/store/theme.store";
 
 interface TriangleBarProps {
   fill: string;
@@ -19,6 +20,7 @@ interface TriangleChartProps {
 }
 export const CustomBarChart: React.FC<TriangleChartProps> = ({ data }) => {
   const { graphHeight, graphWidth } = useGraphSize();
+  const { theme } = useThemeState();
 
   return (
     <>
@@ -33,12 +35,23 @@ export const CustomBarChart: React.FC<TriangleChartProps> = ({ data }) => {
         aria-label="The bar chart shows the gross revenue by channel type."
       >
         <CartesianGrid strokeDasharray="10 10" />
-        <XAxis dataKey="channel" />
-        <YAxis fontSize={12} unit="$" />
+        <XAxis
+          dataKey="channel"
+          tick={{ fill: theme === Theme.Night ? "#FFF" : "#666" }}
+        />
+        <YAxis
+          fontSize={12}
+          unit="$"
+          tick={{ fill: theme === Theme.Night ? "#FFF" : "#666" }}
+        />
         <Bar
           dataKey="totalGrossAmount"
           shape={(props) => <TriangleBar {...props} />}
-          label={{ position: "top", fill: "#000", fontWeight: "bold" }}
+          label={{
+            position: "top",
+            fill: theme === Theme.Night ? "#FFF" : "#000",
+            fontWeight: "bold",
+          }}
         >
           {data.map((_, index: number) => (
             <Cell key={`cell-${index}`} fill={colors[index % 20]} />

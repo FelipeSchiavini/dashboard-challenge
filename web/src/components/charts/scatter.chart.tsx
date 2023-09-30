@@ -11,6 +11,7 @@ import MasterCardLogo from "../logo/mastercard.logo";
 import HipercardLogo from "../logo/hipercard.logo";
 import EloLogo from "../logo/elo.logo";
 import VisaLogo from "../logo/visa.logo";
+import { Theme, useThemeState } from "@/store/theme.store";
 
 interface DataPoint {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,16 +31,21 @@ interface CustomAxisTickProps {
     isShow: boolean;
     offset: number;
     tickCoord: number;
-    value: string
-  },
+    value: string;
+  };
   fontSize: number;
   x: number;
   y: number;
   width: number;
 }
 
-export const ScatterGraph: React.FC<ScatterGraphProps> = ({ x, y, data }): JSX.Element => {
+export const ScatterGraph: React.FC<ScatterGraphProps> = ({
+  x,
+  y,
+  data,
+}): JSX.Element => {
   const { graphHeight, graphWidth } = useGraphSize();
+  const { theme } = useThemeState();
 
   return (
     <>
@@ -59,12 +65,17 @@ export const ScatterGraph: React.FC<ScatterGraphProps> = ({ x, y, data }): JSX.E
           left: 20,
         }}
       >
-        <CartesianGrid strokeDasharray="10 10"/>
-        <XAxis type="number" dataKey={x} unit="$"  />
+        <CartesianGrid strokeDasharray="10 10" />
+        <XAxis
+          type="number"
+          dataKey={x}
+          unit="$"
+          tick={{ fill: theme === Theme.Night ? "#FFF" : "#666" }}
+        />
         <YAxis
           dataKey={y}
           type="category"
-          tick={(props)=><CustomAxisTick {...props} />}
+          tick={(props) => <CustomAxisTick {...props} />}
           allowDuplicatedCategory={false}
           fontSize={12}
         />
@@ -75,34 +86,39 @@ export const ScatterGraph: React.FC<ScatterGraphProps> = ({ x, y, data }): JSX.E
   );
 };
 
+export default ScatterGraph;
 
-export default ScatterGraph
-
-const CustomAxisTick: React.FC<CustomAxisTickProps> = ({width, x, y, payload}) => {
-  const YAxisOffset = 5
+const CustomAxisTick: React.FC<CustomAxisTickProps> = ({
+  width,
+  x,
+  y,
+  payload,
+}) => {
+  const YAxisOffset = 5;
+  const { theme } = useThemeState();
 
   return (
-    <g transform={`translate(${x - width},${y - YAxisOffset})`}  >
+    <g transform={`translate(${x - width},${y - YAxisOffset})`}>
       {LogoByCardBrand(payload.value)}
-      <text  fontSize={10} fill="#666" y={-YAxisOffset}>
+      <text
+        fontSize={10}
+        fill={theme === Theme.Night ? "#FFF" : "#666"}
+        y={-YAxisOffset}
+      >
         {payload.value}
       </text>
     </g>
   );
 };
 
-const LogoByCardBrand = (brand: string) =>{
-  if(brand === "Mastercard"){
-    return <MasterCardLogo/>
+const LogoByCardBrand = (brand: string) => {
+  if (brand === "Mastercard") {
+    return <MasterCardLogo />;
+  } else if (brand === "Visa") {
+    return <VisaLogo />;
+  } else if (brand === "Elo") {
+    return <EloLogo />;
+  } else {
+    return <HipercardLogo />;
   }
-  else if(brand === "Visa"){
-    return <VisaLogo/>
-  }
-  else if(brand === "Elo"){
-    return <EloLogo/>
-  }
-  else{
-    return <HipercardLogo/>
-
-  }
-}
+};
