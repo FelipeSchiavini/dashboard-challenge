@@ -9,7 +9,7 @@ export default {
   },
   plugins: [require("daisyui"),require("@tailwindcss/typography"),],
   daisyui: {
-    themes: ["fantasy"],
+    themes: ["fantasy", 'night', 'cupcake'],
   },
   variants: {
     accessibility: ['responsive', 'focus', 'hover', 'active']

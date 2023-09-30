@@ -10,6 +10,7 @@ import {
 import { useTransactions } from "@/store/transaction.store";
 import { TopCards } from "./components/cards/top-cards";
 import { DataVisualization } from "./components/data-visualization/data-visualization";
+import { ThemeSwitcher } from "@/components/themes/theme-switcher.component";
 
 export const Home: React.FC = () => {
   const { fetchTransactions, totals, averages, transactions } =
@@ -23,6 +24,8 @@ export const Home: React.FC = () => {
     <Background>
       <Separator />
       <CieloLogo />
+      <LargeSeparator />
+      <ThemeSwitcher />
       <LargeSeparator />
       <TopCards totals={totals} averageTicket={averages?.averageTicket} />
       <LargeSeparator borderBottom />
