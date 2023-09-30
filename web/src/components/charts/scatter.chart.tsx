@@ -6,7 +6,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { useGraphSize } from "../../hooks/graphSize.hook";
+import { useGraphSize } from "@/hooks/graphSize.hook";
 import MasterCardLogo from "../logo/mastercard.logo";
 import HipercardLogo from "../logo/hipercard.logo";
 import EloLogo from "../logo/elo.logo";

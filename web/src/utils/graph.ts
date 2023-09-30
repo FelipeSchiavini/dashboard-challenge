@@ -1,4 +1,9 @@
-import { GraphSizeEnum, ScreenSizeEnum, standardPaddingSize, GraphHeightEnum } from "../styles/constants";
+import {
+  GraphSizeEnum,
+  ScreenSizeEnum,
+  standardPaddingSize,
+  GraphHeightEnum,
+} from "../styles/constants";
 
 export const getGraphWidth = (screenWidth: number) => {
   if (screenWidth >= ScreenSizeEnum.Xl) {
@@ -12,7 +17,8 @@ export const getGraphWidth = (screenWidth: number) => {
   }
 };
 
-
 export const getGraphHeight = (screenWidth: number) => {
-  return screenWidth < ScreenSizeEnum.Sm ? GraphHeightEnum.Sm : GraphHeightEnum.Lg
-}
+  return screenWidth < ScreenSizeEnum.Sm
+    ? GraphHeightEnum.Sm
+    : GraphHeightEnum.Lg;
+};

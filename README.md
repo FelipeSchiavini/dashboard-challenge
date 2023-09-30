@@ -2,7 +2,7 @@
 
 This project was carried out during a bootcamp with [Cielo](https://www.cielo.com.br/) and  [Ada](https://ada.tech/). The challenge is in the project's folder ([link](./Desafio_FrontEnd_v2.0.pdf)).
 
-<br><br>
+<br>
 <div align="center" >
   <img src="./project-images/pc.png" alt="mobile"  width=210 />
   &nbsp; &nbsp; &nbsp; &nbsp;

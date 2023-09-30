@@ -1,5 +1,5 @@
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
-import { useGraphSize } from "../../hooks/graphSize.hook";
+import { useGraphSize } from "@/hooks/graphSize.hook";
 
 interface TriangleBarProps {
   fill: string;
@@ -58,7 +58,6 @@ const TriangleBar: React.FC<TriangleBarProps> = ({
 }) => {
   return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 };
-
 
 const getPath = (
   x: number,

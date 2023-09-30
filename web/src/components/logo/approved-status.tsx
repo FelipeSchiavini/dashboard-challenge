@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from "react";
 
 const ApprovedStatus = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -24,5 +24,5 @@ const ApprovedStatus = (props: SVGProps<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-)
-export default ApprovedStatus
+);
+export default ApprovedStatus;

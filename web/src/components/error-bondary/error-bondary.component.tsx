@@ -33,10 +33,10 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <Background>
           <div className="h-screen w-screen flex">
-          <Placeholder
-            title="Something went wrong"
-            description="Unable to connect. Ensure you have a stable internet connection and try again."
-          />
+            <Placeholder
+              title="Something went wrong"
+              description="Unable to connect. Ensure you have a stable internet connection and try again."
+            />
           </div>
         </Background>
       );

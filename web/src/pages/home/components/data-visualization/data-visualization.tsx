@@ -1,16 +1,12 @@
 import { Suspense, lazy } from "react";
-import { DotsLoading } from "../../../../components/loading/loading.component";
-import { Transaction } from "../../../../store/transaction.store";
-import { ChartLayout } from "../../../../components/charts/layout.chart";
-import { CustomBarChart } from "../../../../components/charts/triangleBar.chart";
-import { channelTranslated, statusToSvg } from "../../../../utils/translate";
-import { RightTooltip } from "../../../../components/tooltip/tooltip-component";
-const Table = lazy(
-  () => import("../../../../components/table/table.component")
-);
-const ScatterGraph = lazy(
-  () => import("../../../../components/charts/scatter.chart")
-);
+import { DotsLoading } from "@/components/loading/loading.component";
+import { Transaction } from "@/store/transaction.store";
+import { ChartLayout } from "@/components/charts/layout.chart";
+import { CustomBarChart } from "@/components/charts/triangleBar.chart";
+import { channelTranslated, statusToSvg } from "@/utils/translate";
+import { RightTooltip } from "@/components/tooltip/tooltip-component";
+const Table = lazy(() => import("@/components/table/table.component"));
+const ScatterGraph = lazy(() => import("@/components/charts/scatter.chart"));
 
 interface DataVisualizationProps {
   transactions: Transaction[];
@@ -37,7 +33,12 @@ export const DataVisualization: React.FC<DataVisualizationProps> = ({
 const mapToTransactionToTable = (transactions: Transaction[]) => {
   return transactions.map((transaction) => {
     return {
-      id: <RightTooltip value={`...${transaction.id.slice(-3)}`} tooltip={transaction.id}/>,
+      id: (
+        <RightTooltip
+          value={`...${transaction.id.slice(-3)}`}
+          tooltip={transaction.id}
+        />
+      ),
       date: transaction.date.split("T")[0],
       cardBrand: transaction.cardBrand,
       grossAmount: transaction.grossAmount,
@@ -58,7 +59,7 @@ const groupByChannel = (
   transactions: Transaction[]
 ): GroupedTransactionSummary[] => {
   const grouped = transactions.reduce((acc, transaction) => {
-    const translatedChannel = channelTranslated[transaction.channel]
+    const translatedChannel = channelTranslated[transaction.channel];
 
     if (!acc[translatedChannel]) {
       acc[translatedChannel] = 0;

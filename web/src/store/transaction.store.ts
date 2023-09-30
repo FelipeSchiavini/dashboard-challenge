@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { api } from "../libs/axios";
 import * as qs from "querystringify";
 import { devtools, persist } from "zustand/middleware";
+import { api } from "@/libs/axios";
 type TransactionState = {
   loading: boolean;
   error: string | null;
